@@ -4,13 +4,14 @@ class regex_lookup : public misc {
         {
             vector<string> regex_results;
             smatch m;
-            while(regex_search(info, m, search))
+            string::const_iterator start( info.cbegin() );
+            while(regex_search(start, info.cend(), m, search))
             {
                 if (find(regex_results.begin(), regex_results.end(), m[0]) == regex_results.end()) { // no duplicates
                     format_print("Matching Regex Entry: '" + string(m[0]) + "'", GREEN, '+', 1, false, false);
                     regex_results.push_back(m[0]);
                 }
-                info = m.suffix();
+                start = m.suffix().first;
             }
             
             return regex_results;
@@ -19,9 +20,8 @@ class regex_lookup : public misc {
         vector<string> regex_match(string info)
         {
             vector<string> results;
-            
             for(auto &regex_string: regexes) {
-                vector<string> result = search_regex(info, regex_string);
+                vector<string> result = search_regex(info, regex_string);   
                 move(result.begin(), result.end(), back_inserter(results));
             }
             
