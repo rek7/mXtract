@@ -3,6 +3,7 @@
 An opensource linux based tool that analyses and dumps memory. Its developed as an offensive pentration testing tool which can be used to scan memory for private keys, ips, and passwords.
 ## Screenshots
 ![Screenshot](https://github.com/rek7/mXtract/blob/master/img/ipregex.png)
+
 Scan without verbose, and with a simple IP regex.
 ![Screenshot](https://github.com/rek7/mXtract/blob/master/img/949227ffe00d6cfb46826c01c9c1c692.png)
 Scan with verbose and with a simple IP regex, scanning only heap and stack.
@@ -16,6 +17,8 @@ In most linux environments users can access the memory of processes, allows atta
 + Ability to Mass Scan Every Proccess or a Specfic PID
 + Able to choose memory sections to scan
 + Memory dumps automatically removes unicode characters which allows for processing with other tools or manually
+## Getting started
+###### Compiling: ```g++ -std=c++11 -O2 src/main.cpp -o mxtract```
 ## Commands 
 ```
         -v      Enable Verbose Output
@@ -30,5 +33,3 @@ In most linux environments users can access the memory of processes, allows atta
         -p=     Specify single pid to scan
         Either -r= or -w needed
 ```
-## Getting started
-###### Compiling: ```g++ -std=c++11 -O2 src/main.cpp -o mxtract```
