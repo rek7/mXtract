@@ -12,7 +12,7 @@ Scan with verbose and with a simple IP regex, scanning only heap and stack.
 
 Scan without verbose, and with a simple IP regex.
 ## Why dump directly from memory?
-In most linux environments users can access the memory of processes, allows attackers to harvest credentials, private keys, or anything that isnt suppose to be seen but is being processed by a program in clear text.
+In most linux environments users can access the memory of processes, allows attackers to harvest credentials, private keys, or anything that isnt suppose to be seen but is being processed by a program in clear text. Remember your results are only as good as your regexes.
 ## Features
 + Ability to enter regex lists
 + Clear and Readable Display
