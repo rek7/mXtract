@@ -8,7 +8,7 @@ class regex_lookup : public misc {
             while(regex_search(start, info.cend(), m, search))
             {
                 if (find(regex_results.begin(), regex_results.end(), m[0]) == regex_results.end()) { // no duplicates
-                    format_print("Matching Regex Entry: '" + string(m[0]) + "'", GREEN, '+', 1, false, false);
+                    format_print("Matching Regex Entry: '" + string(m[0]) + "'", GREEN, '+', (option.is_verbose ? 2 : 1), false, false);
                     regex_results.push_back(m[0]);
                 }
                 start = m.suffix().first;
