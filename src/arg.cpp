@@ -7,11 +7,11 @@ class arg : public misc{
         }
         void banner(void) {
             if(!option.suppress_banner) {
-                cout << (option.is_colored ? LIGHT_GREEN : "")<< R"(           __  ___                  _   
+                cout << (option.is_colored ? LIGHT_GREEN : "")<< R"(           __  ___                  _     { V1.0 }
   _ __ ___ \ \/ / |_ _ __ __ _  ___| |_ 
  | '_ ` _ \ \  /| __| '__/ _` |/ __| __|
  | | | | | |/  \| |_| | | (_| | (__| |_ 
- |_| |_| |_/_/\_\\__|_|  \__,_|\___|\__|    V1.0)" << (option.is_colored ? NORMAL : "") << endl; // http://patorjk.com/software/taag/#p=display&f=Doom&t=mXtract
+ |_| |_| |_/_/\_\\__|_|  \__,_|\___|\__|  https://github.com/rek7/mXtract)" << (option.is_colored ? NORMAL : "") << endl; // http://patorjk.com/software/taag/#p=display&f=Doom&t=mXtract
             }
         }
         
