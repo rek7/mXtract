@@ -2,13 +2,13 @@
 ## What is mXtract?
 An opensource linux based tool that analyses and dumps memory. Its developed as an offensive pentration testing tool which can be used to scan memory for private keys, ips, and passwords using regexes. Remember your results are only as good as your regexes.
 ## Screenshots
-![Screenshot](https://github.com/rek7/mXtract/blob/master/img/f8d810903bba3b2f74f0ac8cbef9c2ad.png)
+![Screenshot](https://github.com/rek7/mXtract/blob/master/img/ss1.png)
 
 Scan with verbose and with a simple IP regex, scanning every data segment.
-![Screenshot](https://github.com/rek7/mXtract/blob/master/img/949227ffe00d6cfb46826c01c9c1c692.png)
+![Screenshot](https://github.com/rek7/mXtract/blob/master/img/ss2.png)
 
 Scan with verbose and with a simple IP regex, scanning only heap and stack.
-![Screenshot](https://github.com/rek7/mXtract/blob/master/img/ipregex.png)
+![Screenshot](https://github.com/rek7/mXtract/blob/master/img/ss3.png)
 
 Scan without verbose, and with a simple IP regex.
 ## Why dump directly from memory?
