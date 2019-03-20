@@ -34,15 +34,17 @@ class regex_lookup : public misc {
                 ifstream read_regex(option.regex_db);
                 if(read_regex.is_open()) {
                     for(string line; getline(read_regex, line);) {
-                        regexes.push_back(regex(line));
+                        try {
+                            regexes.push_back(regex(line));
+                        } catch(...) {
+                            format_print("MALFORMED REGEX: '" + line + "'", RED, '-');
+                            exit(EXIT_FAILURE);
+                        }
                     }
                     return true;
                 }
                 format_print("ERROR OPENING REGEX DB: " + option.regex_db, RED, '-');
                 exit(EXIT_FAILURE);
-            }
-            else {
-                //regexes.push_back("(\\d{1,3}(\\.\\d{1,3}){3})");
             }
             return false;
         }
