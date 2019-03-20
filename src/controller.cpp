@@ -68,7 +68,7 @@ class controller : public misc {
             }
             return true;
         }
-        format_print("PID Killed or Permission Denied: " + to_string(pid), RED, '-', 1);
+        format_print("PID Killed or Permission Denied: " + to_string(pid), RED, '-');
         return false;
     }
     
