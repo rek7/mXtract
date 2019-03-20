@@ -56,7 +56,8 @@ class misc {
             return;
         }
         string time = formatted_time("%X");
-        cout << setw(8*indent_level) << (option.is_colored ? color : "") << (is_time ? "[" + time + "] " : "") << "[" << status << "] " << print
+        cout << string(indent_level*2, ' ') << (indent_level ? " └" : "") << (option.is_colored ? color : "") 
+        << (is_time ? "[" + time + "] " : "") << "[" << status << "] " << print
         << NORMAL << endl << flush;
     }
 
