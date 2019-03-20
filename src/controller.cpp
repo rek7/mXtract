@@ -10,7 +10,7 @@ class controller : public misc {
                 }
             }
         }
-        format_print((r.load_regex() ? "Successfully Loaded Regex DB" : "No Regexes Loaded"), YELLOW, '!');
+        format_print((r.load_regex() ? "Successfully Loaded Regex DB: '" + option.regex_db + "'" : "No Regexes Loaded"), YELLOW, '!');
     }
     
     bool is_read_section(string section) 
