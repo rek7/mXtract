@@ -62,13 +62,13 @@ class controller : public misc {
                         }
                     }
                     else {
-                        format_print("ERROR SCANNING MEMORY RANGE", RED, '-', 1, false, false);
+                        format_print("ERROR SCANNING MEMORY RANGE", RED, '-', (option.is_verbose ? 2 : 1), false, false);
                     }
                 }
             }
             return true;
         }
-        format_print("PID Killed or Permission Denied: " + to_string(pid), RED, '-');
+        format_print("PID Killed or Permission Denied: " + to_string(pid), RED, '-', 1);
         return false;
     }
     
