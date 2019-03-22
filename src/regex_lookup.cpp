@@ -13,7 +13,6 @@ class regex_lookup : public misc {
                 }
                 start = m.suffix().first;
             }
-            
             return regex_results;
         }
 
@@ -24,7 +23,6 @@ class regex_lookup : public misc {
                 vector<string> result = search_regex(info, regex_string);   
                 move(result.begin(), result.end(), back_inserter(results));
             }
-            
             return results;
         }
 
