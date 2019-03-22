@@ -50,11 +50,12 @@ class controller : public misc {
                         free(data);
                         string info = tmp_buff.str();
                         strip_unicode(info);
-                        vector<string> results = r.regex_match(info);
-                        if(option.is_regex_write && results.size() > 0)
-                        {
-                            for(auto &result: results) {
-                                write_dump(name + ":" + result, "regex_results");
+                        if(!option.regex_db.empty()) {
+                            vector<string> results = r.regex_match(info);
+                            if(option.is_regex_write && results.size() > 0) {
+                                for(auto &result: results) {
+                                    write_dump(name + ":" + result, "regex_results");
+                                }
                             }
                         }
                         if(option.is_write) {
