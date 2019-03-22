@@ -32,7 +32,7 @@ class arg : public misc{
             << "Example usage: " << args[0] << " -w -a -d=/tmp/output/ -o -r=regex.db" << endl;
         }
         
-        bool parse_args(void) 
+        bool parse_args(void) // returns false when program isnt able to be run
         {
             bool is_required = false;
             for (int i = 1; i < argn; ++i) {
@@ -49,7 +49,7 @@ class arg : public misc{
                         if(!convert) {
                             banner();
                             format_print("NUMBER NEEDED AS PROCESS ID", RED, '-');
-                            exit(EXIT_FAILURE);
+                            return false;
                         }
                         option.pid = convert;
                     }
@@ -76,7 +76,7 @@ class arg : public misc{
                     else if(arg == "-h") {
                         banner();
                         usage();
-                        exit(EXIT_SUCCESS);
+                        return false;
                     }
                 }
             }
@@ -84,7 +84,7 @@ class arg : public misc{
             {
                 banner();
                 format_print("Required args needed -h for help", RED, '-');
-                exit(EXIT_FAILURE);
+                return false;
             }
             return true;
         }
