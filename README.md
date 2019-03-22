@@ -1,6 +1,6 @@
 # mXtract
 ## What is mXtract?
-An opensource linux based tool that analyses and dumps memory. Its developed as an offensive pentration testing tool which can be used to scan memory for private keys, ips, and passwords using regexes. Remember your results are only as good as your regexes.
+An opensource linux based tool that analyzes and dumps memory. It is developed as an offensive pentration testing tool, which is used to scan memory for private keys, ips, and passwords using regexes. Remember, your results are only as good as your regexes.
 ## Screenshots
 ![Screenshot](https://github.com/rek7/mXtract/blob/master/img/ss1.png)
 
