@@ -17,6 +17,6 @@ struct options {
     bool is_colored = true;
     bool is_regex_write = false;
     bool suppress_banner = false;
-}; options option;
+};
 
 #endif
