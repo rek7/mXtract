@@ -9,6 +9,7 @@
 #include <string>
 #include <cstdlib>
 #include <cerrno>
+#include <cstring>
 
 extern "C" {
     #include <dirent.h>
