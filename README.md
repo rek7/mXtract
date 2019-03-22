@@ -20,7 +20,8 @@ In most linux environments users can access the memory of processes, this allows
 + Able to choose memory sections to scan
 + Memory dumps automatically removes unicode characters which allows for processing with other tools or manually
 ## Getting started
-###### Compiling: ```g++ -std=c++11 -O2 src/main.cpp -o mxtract```
+###### Compiling: ```sh compile.sh``` 
+###### This will create the directory bin/ and compile the binary as mXtract
 ## Commands 
 ```
         -v      Enable Verbose Output
