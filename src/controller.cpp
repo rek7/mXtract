@@ -40,6 +40,7 @@ class controller : public misc {
                     long start_addr = strtol(range[0].c_str(), NULL, 16);
                     long end_addr = strtol(range[1].c_str(), NULL, 16);
                     if(start_addr > 0xFFFFFFFFFFFF) {
+                        format_print("MALFORMED MEMORY RANGE", RED, '-', (option.is_verbose ? 2 : 1), false, false);
                         continue;
                     }
                     size_t len = end_addr-start_addr;
