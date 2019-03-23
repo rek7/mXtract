@@ -78,11 +78,10 @@ class controller : public misc {
     {
         DIR *proc_handle = opendir("/proc/");
         struct dirent *pids = {0};
-        
         while((pids = readdir(proc_handle)))
         {
             if(pids->d_type == DT_DIR && isdigit(pids->d_name[0]) && atoi(pids->d_name) != getpid()) {
-                pid_t pid = stoi(pids->d_name);
+                pid_t pid = atoi(pids->d_name);
                 process_pid(pid);
             }
         }
