@@ -14,8 +14,8 @@ class process_operations : public misc{
                 {
                     smatch m;
                     if(regex_search(line, m, parse)) {
-                        vector<string> info;
                         if(string(m[2])[0] == 'r') { // checking if memory is readable
+                            vector<string> info;
                             info.push_back(string(m[1]));
                             info.push_back(string(m[6]));
                             map.push_back(info);
