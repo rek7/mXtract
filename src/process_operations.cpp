@@ -15,7 +15,7 @@ class process_operations : public misc{
                     smatch m;
                     if(regex_search(line, m, parse)) {
                         vector<string> info;
-                        if(string(m[2])[0] == 'r') {
+                        if(string(m[2])[0] == 'r') { // checking if memory is readable
                             info.push_back(string(m[1]));
                             info.push_back(string(m[6]));
                             map.push_back(info);
@@ -55,12 +55,12 @@ class process_operations : public misc{
             return data;
         }
 
-        bool attach_pid()
+        bool attach_pid(void)
         {
             return ((ptrace(PTRACE_ATTACH, pid, NULL, NULL) >= 0) ? true : false);
         }
 
-        bool detach_pid()
+        bool detach_pid(void)
         {
             return ((ptrace(PTRACE_DETACH, pid, NULL, NULL) >= 0) ? true : false);
         }
