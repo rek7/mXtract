@@ -34,7 +34,7 @@ class controller : public misc {
             }
             wait(NULL);
             for(auto &value: ranges) {
-                if(value.size() > 1 && is_read_section(value[1])) {
+                if(!value.empty() && is_read_section(value[1])) {
                     format_print("Scanning Address Range: '" +  value[0] + "' Name: '" + value[1] + "'", GREEN, '+', 1, true, false);
                     vector<string> range = tokenize(value[0], '-');
                     long start_addr = strtol(range[0].c_str(), NULL, 16);
@@ -52,7 +52,7 @@ class controller : public misc {
                         strip_unicode(info);
                         if(!option.regex_db.empty()) {
                             vector<string> results = r.regex_match(info);
-                            if(option.is_regex_write && results.size() > 0) {
+                            if(option.is_regex_write && !results.empty()) {
                                 for(auto &result: results) {
                                     write_dump(name + ":" + result, "regex_results");
                                 }
