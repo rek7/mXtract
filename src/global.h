@@ -1,5 +1,5 @@
-#ifndef __INFO_STRUCTS_H__
-#define __INFO_STRUCTS_H__
+#ifndef __GLOBAL_H__
+#define __GLOBAL_H__
 
 #define GREEN "\e[32m"
 #define LIGHT_GREEN "\e[92m"
