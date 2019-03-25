@@ -16,7 +16,7 @@ In most linux environments users can access the memory of processes, this allows
 ## Features
 + Ability to enter regex lists
 + Clear and Readable Display
-+ Ability to Mass Scan Every Proccess or a Specfic PID
++ Ability to Mass Scan Every Proccess or a Specific PID
 + Able to choose memory sections to scan
 + Memory dumps automatically removes unicode characters which allows for processing with other tools or manually
 ## Getting started
