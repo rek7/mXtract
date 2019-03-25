@@ -56,7 +56,7 @@ class misc {
             return;
         }
         string time = formatted_time("%X");
-        cout << string((indent_level > 1 ? indent_level*2-1 : indent_level*2), ' ') << (indent_level > 1 ? "|" : "")
+        cout << string((indent_level > 1 ? indent_level*2-1 : indent_level*2), ' ') << (indent_level > 1 ? "│" : "")
         << (indent_level ? " ├" : "") << (option.is_colored ? color : "") //https://www.copypastecharacter.com/all-characters
         << (is_time ? "[" + time + "] " : "") << "[" << status << "] " << print
         << NORMAL << endl << flush;
