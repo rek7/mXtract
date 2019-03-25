@@ -7,11 +7,14 @@ class arg : public misc{
         }
         void banner(void) {
             if(!option.suppress_banner) {
-                cout << (option.is_colored ? LIGHT_GREEN : "")<< R"(           __  ___                  _     { V1.0 }
-  _ __ ___ \ \/ / |_ _ __ __ _  ___| |_ 
- | '_ ` _ \ \  /| __| '__/ _` |/ __| __|
- | | | | | |/  \| |_| | | (_| | (__| |_ 
- |_| |_| |_/_/\_\\__|_|  \__,_|\___|\__|  https://github.com/rek7/mXtract)" << (option.is_colored ? NORMAL : "") << endl; // http://patorjk.com/software/taag/#p=display&f=Doom&t=mXtract
+                cout << (option.is_colored ? LIGHT_GREEN : "")<< "           __  ___                  _     " 
+                    << "{ " << (option.is_colored ? MAGENTA : "") << "V" << VERSION << (option.is_colored ? LIGHT_GREEN : "") << " }"
+                    << endl << "  _ __ ___ \\ \\/ / |_ _ __ __ _  ___| |_ "
+                    << endl << " | '_ ` _ \\ \\  /| __| '__/ _` |/ __| __|"
+                    << endl << " | | | | | |/  \\| |_| | | (_| | (__| |_ "
+                    << endl << " |_| |_| |_/_/\\_\\\\__|_|  \\__,_|\\___|\\__|  "
+                    << (option.is_colored ? WHITE : "") << "https://github.com/rek7/mXtract"
+                    << (option.is_colored ? NORMAL : "") << endl; // http://patorjk.com/software/taag/#p=display&f=Doom&t=mXtract
             }
         }
         
