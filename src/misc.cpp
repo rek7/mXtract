@@ -1,105 +1,83 @@
-class arg : public misc{
+class misc {
     public:
-        arg(int argc, char *argv[])
+    vector <string> tokenize(string parse_str, char schar)
+    {
+        vector <string> results;
+        stringstream ssline(parse_str);
+        for(string split; getline(ssline, split, schar);)
         {
-            args = argv;
-            argn = argc;
+            results.push_back(split);
         }
-        void banner(void) {
-            if(!option.suppress_banner) {
-                cout << (option.is_colored ? LIGHT_GREEN : "")<< "           __  ___                  _     " 
-                    << "{ " << (option.is_colored ? MAGENTA : "") << "V" << VERSION << (option.is_colored ? LIGHT_GREEN : "") << " }"
-                    << endl << "  _ __ ___ \\ \\/ / |_ _ __ __ _  ___| |_ "
-                    << endl << " | '_ ` _ \\ \\  /| __| '__/ _` |/ __| __|"
-                    << endl << " | | | | | |/  \\| |_| | | (_| | (__| |_ "
-                    << endl << " |_| |_| |_/_/\\_\\\\__|_|  \\__,_|\\___|\\__|  "
-                    << (option.is_colored ? WHITE : "") << "https://github.com/rek7/mXtract"
-                    << (option.is_colored ? NORMAL : "") << endl; // http://patorjk.com/software/taag/#p=display&f=Doom&t=mXtract
-            }
-        }
-        
-        void usage(void)
-        {
-            cout << "USAGE: " << args[0] << " -(args)" << endl
-            << "\t-v\tEnable Verbose Output" << endl
-            << "\t-s\tSuppress Banner" << endl
-            << "\t-h\tHelp" << endl
-            << "\t-c\tsuppress colored output" << endl
-            << "\t-r=\tRegex DB" << endl
-            << "\t-a\tScan all memory ranges not just heap/stack" << endl
-            << "\t-w\tWrite raw memory to file Default directory is " << option.directory << endl
-            << "\t-o\tWrite regex output to file" << endl
-            << "\t-d=\tCustom Ouput Directory" << endl
-            << "\t-p=\tSpecify single pid to scan" << endl
-            << "\tEither -r= or -w needed" << endl
-            << "Example usage: " << args[0] << " -w -a -d=/tmp/output/ -o -r=regex.db" << endl;
-        }
-        
-        bool parse_args(void) // returns false when program isnt able to be run
-        {
-            bool is_required = false;
-            for (int i = 1; i < argn; ++i) {
-                if(strlen(args[i]) >= 2) {
-                    string arg = string(args[i]).substr(0, (strlen(args[i]) == 2 ? 2 : 3));
-                    if(arg == "-v") {
-                        option.is_verbose = true;
-                    }
-                    else if(arg == "-d=") {
-                        option.directory = string(args[i]).substr(3, string(args[i]).size());
-                    }
-                    else if(arg == "-p=") {
-                        int convert = str_to_int(string(args[i]).substr(3, string(args[i]).size()));
-                        if(!convert) {
-                            banner();
-                            format_print("NUMBER NEEDED AS PROCESS ID", RED, '-');
-                            return false;
-                        }
-                        option.pid = convert;
-                    }
-                    else if(arg == "-r=") {
-                        is_required = true;
-                        option.regex_db = string(args[i]).substr(3, string(args[i]).size());
-                    }
-                    else if(arg == "-s") {
-                        option.suppress_banner = true;
-                    }
-                    else if(arg == "-a") {
-                        option.dump_all = true;
-                    }
-                    else if(arg == "-c") {
-                        option.is_colored = false;
-                    }
-                    else if(arg == "-o") {
-                        option.is_regex_write = true;
-                    }
-                    else if(arg == "-w") {
-                        is_required = true;
-                        option.is_write = true;
-                    }
-                    else if(arg == "-h") {
-                        banner();
-                        usage();
-                        return false;
-                    }
-                }
-            }
-            if(!is_required)
-            {
-                banner();
-                format_print("Required args needed -h for help", RED, '-');
-                return false;
-            }
+        return results;
+    }
+
+    bool write_dump(string data, string name)
+    {
+        ofstream dump(option.directory + name + ".txt", ios::app | ios::binary);
+        if(dump.is_open()) {
+            dump << data << endl;
+            dump.close();
             return true;
         }
-        
-        void warn_user(void)
-        {
-            if(geteuid() != 0) {
-                format_print("Running as root is recommended as not all PIDs will be scanned", YELLOW, '!');
+        return false;
+    }
+
+    bool is_dir(string dir)
+    {
+        struct stat st;
+        if(!stat(dir.c_str(), &st)) {
+            if(st.st_mode & S_IFDIR) {
+                return true;
             }
         }
-        
-    protected:
-        char **args;
-        int argn;
+        return false;
+    }
+
+    int str_to_int(string convert)
+    {
+        try {
+            return stoi(convert);
+        } catch(...) {
+            return 0;
+        }
+    }
+
+    string formatted_time(char *time_format)
+    {
+        time_t current = time(NULL);
+        struct tm current_time = *localtime(&current);
+        char buf[80];
+        strftime(buf, sizeof(buf), time_format, &current_time);
+        return buf;
+    }
+
+    void format_print(string print, string color, char status, int indent_level=0, bool is_verbose=false, bool is_time=true) {
+        if(is_verbose && !option.is_verbose) {
+            return;
+        }
+        string time = formatted_time("%X");
+        cout << string((indent_level > 1 ? indent_level*2-1 : indent_level*2), ' ') << (indent_level > 1 ? "|" : "")
+        << (indent_level ? " ├" : "") << (option.is_colored ? color : "") //https://www.copypastecharacter.com/all-characters
+        << (is_time ? "[" + time + "] " : "") << "[" << status << "] " << print
+        << NORMAL << endl << flush;
+    }
+
+    string pid_to_name(string pid)
+    {
+        ifstream cmdline("/proc/" + pid + "/cmdline");
+        string name;
+        getline(cmdline, name);
+        return name;
+    }
+
+    static bool invalid_char(char c) 
+    {
+        return !(c >= 32 && c <= 127);   
+    }
+
+    void strip_unicode(string &str) //https://stackoverflow.com/questions/10178700/c-strip-non-ascii-characters-from-string/15813530
+    { 
+        str.erase(remove_if(str.begin(),str.end(), invalid_char), str.end());  
+    }
+
 };
