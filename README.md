@@ -1,4 +1,5 @@
 # mXtract
+[![Build Status](https://travis-ci.org/rek7/mXtract.svg?branch=master)]
 ## What is mXtract?
 An opensource linux based tool that analyzes and dumps memory. It is developed as an offensive pentration testing tool, its primary purpose is to scan memory for private keys, ips, and passwords using regexes. Remember, your results are only as good as your regexes.
 ## Screenshots
