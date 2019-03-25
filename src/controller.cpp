@@ -96,6 +96,7 @@ class controller : public misc {
         else {
             inter_pids();
         }
+        format_print("Finished", YELLOW, '!');
     }
     
     private:
