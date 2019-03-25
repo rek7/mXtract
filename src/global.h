@@ -5,7 +5,11 @@
 #define LIGHT_GREEN "\e[92m"
 #define YELLOW "\e[33m"
 #define RED "\e[31m"
+#define MAGENTA "\e[35m"
+#define WHITE "\e[97m"
 #define NORMAL "\e[39m"
+
+#define VERSION 1.1
 
 struct options {
     string regex_db;
