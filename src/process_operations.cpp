@@ -50,7 +50,7 @@ class process_operations : public misc{
                     free(data);
                     return NULL;
                 }
-                memcpy(data+offset, &word, sizeof(word));
+                memcpy((uint8_t *)data+offset, &word, sizeof(word));
             }
             return data;
         }
