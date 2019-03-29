@@ -46,3 +46,10 @@ Output:
         -f=     Regex Results Filename Default is: 'regex_results.txt'
         -d=     Custom Ouput Directory
 ```
+## Featured On:
+https://www.kitploit.com/2019/03/mxtract-memory-extractor-analyzer.html
+https://blog.hackersonlineclub.com/2019/03/mxtract-opensource-linux-based-memory.html
+https://firmwaresecurity.com/2019/03/22/mxtract-linux-based-tool-that-analyses-and-dumps-memory/
+https://twitter.com/TheHackersNews/status/1108987907711352833
+https://twitter.com/binitamshah/status/1109832206220963841
+https://twitter.com/Dinosn/status/1108958417354252289
