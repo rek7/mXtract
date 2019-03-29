@@ -5,36 +5,43 @@ class arg : public misc{
             args = argv;
             argn = argc;
         }
+
         void banner(void) {
             if(!option.suppress_banner) {
-                cout << (option.is_colored ? LIGHT_GREEN : "")<< "           __  ___                  _     " 
-                    << "{ " << (option.is_colored ? MAGENTA : "") << "V" << VERSION << (option.is_colored ? LIGHT_GREEN : "") << " }"
-                    << endl << "  _ __ ___ \\ \\/ / |_ _ __ __ _  ___| |_ "
-                    << endl << " | '_ ` _ \\ \\  /| __| '__/ _` |/ __| __|"
-                    << endl << " | | | | | |/  \\| |_| | | (_| | (__| |_ "
-                    << endl << " |_| |_| |_/_/\\_\\\\__|_|  \\__,_|\\___|\\__|  "
-                    << (option.is_colored ? WHITE : "") << "https://github.com/rek7/mXtract"
-                    << (option.is_colored ? NORMAL : "") << endl; // http://patorjk.com/software/taag/#p=display&f=Doom&t=mXtract
+                cout << (option.is_colored ? LIGHT_GREEN : "") << "           __  ___                  _     " 
+                << "{ " << (option.is_colored ? MAGENTA : "") << "V" << VERSION << (option.is_colored ? LIGHT_GREEN : "") << " }"
+                << endl << "  _ __ ___ \\ \\/ / |_ _ __ __ _  ___| |_ "
+                << endl << " | '_ ` _ \\ \\  /| __| '__/ _` |/ __| __|"
+                << endl << " | | | | | |/  \\| |_| | | (_| | (__| |_ "
+                << endl << " |_| |_| |_/_/\\_\\\\__|_|  \\__,_|\\___|\\__|  "
+                << (option.is_colored ? WHITE : "") << "https://github.com/rek7/mXtract"
+                << (option.is_colored ? NORMAL : "") << endl; // http://patorjk.com/software/taag/#p=display&f=Standard&t=mXtract
             }
         }
         
         void usage(void)
         {
-            cout << "USAGE: " << args[0] << " -(args)" << endl
+            cout << "Usage: " << args[0] << " [args]" << endl
+            << "General:" << endl
             << "\t-v\tEnable Verbose Output" << endl
             << "\t-s\tSuppress Banner" << endl
             << "\t-h\tHelp" << endl
-            << "\t-c\tsuppress colored output" << endl
-            << "\t-r=\tRegex DB" << endl
-            << "\t-a\tScan all memory ranges not just heap/stack" << endl
-            << "\t-w\tWrite raw memory to file Default directory is " << option.directory << endl
-            << "\t-o\tWrite regex output to file" << endl
+            << "\t-c\tSuppress Colored Output" << endl
+            << "Target and Regex:" << endl
+            << "\t-i\tShow Detailed Process/User Info" << endl
+            << "\t-a\tScan all Memory Ranges not just Heap/Stack" << endl
+            << "\t-e\tScan Process Environment Files" << endl
+            << "\t-r=\tRegex Database to Use" << endl
+            << "\t-p=\tSpecify Single PID to Scan" << endl
+            << "Output:" << endl
+            << "\t-wm\tWrite Raw Memory to File Default Directory is: '" << option.directory << "'" << endl
+            << "\t-wi\tWrite Process Info to Beginning of File (Used in Conjunction with -w)" << endl
+            << "\t-wr\tWrite Regex Output to File (Will Appear in the Output Directory)" << endl
+            << "\t-f=\tRegex Results Filename Default is: '" << option.regex_result_filename << "'" << endl
             << "\t-d=\tCustom Ouput Directory" << endl
-            << "\t-p=\tSpecify single pid to scan" << endl
-            << "\tEither -r= or -w needed" << endl
-            << "Example usage: " << args[0] << " -w -a -d=/tmp/output/ -o -r=regex.db" << endl;
+            << "Either -r= or -wm needed" << endl
+            << "Example usage: '" << args[0] << " -wm -wr -e -i -d=/tmp/output/ -r=example_regexes.db'" << endl;
         }
-        
         bool parse_args(void) // returns false when program isnt able to be run
         {
             bool is_required = false;
@@ -60,21 +67,33 @@ class arg : public misc{
                         is_required = true;
                         option.regex_db = string(args[i]).substr(3, string(args[i]).size());
                     }
+                    else if(arg == "-f=") {
+                        option.regex_result_filename = string(args[i]).substr(3, string(args[i]).size());
+                    }
+                    else if(arg == "-wr") {
+                        option.is_regex_write = true;
+                    }
+                    else if(arg == "-wi") {
+                        option.is_write_proc_info = true;
+                    }
+                    else if(arg == "-wm") {
+                        is_required = true;
+                        option.is_write = true;
+                    }
                     else if(arg == "-s") {
                         option.suppress_banner = true;
                     }
                     else if(arg == "-a") {
                         option.dump_all = true;
                     }
+                    else if(arg == "-i") {
+                        option.is_proc_info = true;
+                    }
                     else if(arg == "-c") {
                         option.is_colored = false;
                     }
-                    else if(arg == "-o") {
-                        option.is_regex_write = true;
-                    }
-                    else if(arg == "-w") {
-                        is_required = true;
-                        option.is_write = true;
+                    else if(arg == "-e") {
+                        option.is_env_scan = true;
                     }
                     else if(arg == "-h") {
                         banner();
@@ -86,7 +105,7 @@ class arg : public misc{
             if(!is_required)
             {
                 banner();
-                format_print("Required args needed -h for help", RED, '-');
+                format_print("Required Args Needed -h For help", RED, '-');
                 return false;
             }
             return true;

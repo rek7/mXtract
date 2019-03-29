@@ -1,4 +1,4 @@
-class process_operations : public misc{
+class process_operations : public misc {
     public:
         process_operations(pid_t proc_pid) {
             pid = proc_pid;
@@ -50,9 +50,36 @@ class process_operations : public misc{
                     free(data);
                     return NULL;
                 }
-                memcpy(data+offset, &word, sizeof(word));
+                memcpy((uint8_t *)data+offset, &word, sizeof(word));
             }
             return data;
+        }
+
+        string proc_env(void) 
+        {
+            string file_content;
+            ifstream read_environ("/proc/" + to_string(pid) + "/environ"); 
+            if(read_environ.is_open()) {
+                getline(read_environ, file_content); // its a single line
+            }
+            return file_content;
+        }
+
+        string proc_info(void)
+        {
+            string content;
+            struct stat st = {0};
+            if (lstat(string("/proc/" + to_string(pid) + "/stat").c_str(), &st) != -1) {
+                struct passwd *pw = getpwuid(st.st_uid);
+                if(pw) {
+                    content += string(string(pw->pw_name) + ":" + to_string(st.st_gid) + ":" + to_string(st.st_atime));
+                    format_print(string("Being Run By: '" + string(pw->pw_name) + "' GUID: '" + to_string(st.st_gid) + 
+                        "' Program Started: '" + formatted_time("%m/%d/%y %X", st.st_atime)) + "'", YELLOW, '!', 1, false, false);
+                } else {
+                    format_print("Unable to Get Process Info", RED, '-', 1, false, false);
+                }
+            }
+            return content;
         }
 
         bool attach_pid(void)

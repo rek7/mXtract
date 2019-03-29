@@ -17,6 +17,7 @@ extern "C" {
     #include <unistd.h>
     #include <sys/stat.h>
     #include <sys/wait.h>
+    #include <pwd.h>
 }
 
 #endif

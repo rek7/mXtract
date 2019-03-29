@@ -13,7 +13,7 @@ class misc {
 
     bool write_dump(string data, string name)
     {
-        ofstream dump(option.directory + name + ".txt", ios::app | ios::binary);
+        ofstream dump(option.directory + name, ios::app);
         if(dump.is_open()) {
             dump << data << endl;
             dump.close();
@@ -42,9 +42,8 @@ class misc {
         }
     }
 
-    string formatted_time(char *time_format)
+    string formatted_time(char *time_format, time_t current = time(NULL))
     {
-        time_t current = time(NULL);
         struct tm current_time = *localtime(&current);
         char buf[80];
         strftime(buf, sizeof(buf), time_format, &current_time);

@@ -14,12 +14,11 @@ options option; // creating instance of options struct to fill in with user data
 
 int main(int argc, char *argv[]) {
     arg a(argc, argv);
-    if(!a.parse_args()) {
-        exit(EXIT_FAILURE);
+    if(a.parse_args()) {
+        a.banner();
+        a.warn_user();
+        controller c;
+        c.begin_scan();
     }
-    a.banner();
-    a.warn_user();
-    controller c;
-    c.begin_scan();
     return EXIT_SUCCESS;
 }
