@@ -1,10 +1,6 @@
 # mXtract
 [![Build Status](https://travis-ci.org/rek7/mXtract.svg?branch=master)](https://travis-ci.org/rek7/mXtract) [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/rek7/mXtract/blob/master/LICENSE) [![Twitter](https://img.shields.io/badge/twitter-%40mxtract-blue.svg)](https://twitter.com/mxtract)
-<<<<<<< HEAD
 ----
-=======
-
->>>>>>> f2e81b44c4e3a711a5feaf6e0611d2766152562f
 mXtract is an opensource linux based tool that analyzes and dumps memory. It is developed as an offensive pentration testing tool, its primary purpose is to scan memory for private keys, ips, and passwords using regexes. Remember, your results are only as good as your regexes.
 ## Screenshots
 ![Screenshot](https://github.com/rek7/mXtract/blob/master/img/ss1.png)
@@ -53,3 +49,10 @@ Output:
         -f=     Regex Results Filename Default is: 'regex_results.txt'
         -d=     Custom Ouput Directory
 ```
+## Featured On:
+https://www.kitploit.com/2019/03/mxtract-memory-extractor-analyzer.html
+https://blog.hackersonlineclub.com/2019/03/mxtract-opensource-linux-based-memory.html
+https://firmwaresecurity.com/2019/03/22/mxtract-linux-based-tool-that-analyses-and-dumps-memory/
+https://twitter.com/TheHackersNews/status/1108987907711352833
+https://twitter.com/binitamshah/status/1109832206220963841
+https://twitter.com/Dinosn/status/1108958417354252289
