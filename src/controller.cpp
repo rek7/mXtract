@@ -2,7 +2,7 @@ class controller : public misc {
     public:
     controller(void)
     {
-        if(option.is_write || option.is_regex_write) {
+        if(option.is_write || option.is_regex_write || option.is_xml) {
             if(!is_dir(option.directory)) {
                 if(mkdir(option.directory.c_str(), 0755)) {
                     format_print("ERROR CREATING OUTPUT DIRECTORY", RED, '-');
@@ -25,9 +25,19 @@ class controller : public misc {
     {
         if(!option.regex_db.empty()) {
             vector<string> results = r.regex_match(data);
-            if(option.is_regex_write && !results.empty()) {
+            if((option.is_regex_write || option.is_html || option.is_xml) && !results.empty()) {
                 for(auto &result: results) {
-                    write_dump(proc_name + ":" + result, option.regex_result_filename);
+                    if(option.is_xml) {
+                        write_dump("\t<result>\n\t\t<rname>" + proc_name + "</rname>", "results.xml");
+                        write_dump("\t\t<range>" + found_location + "</range>", "results.xml");
+                        write_dump("\t\t<regex_result>" + result + "</regex_result>\n\t<result>", "results.xml");
+                    } else if(option.is_html) {
+                        write_dump("<tr><td>" + proc_name + "</td>", "results.html");
+                        write_dump("<td>" + found_location + "</td>", "results.html");
+                        write_dump("<td>" + result + "</td></tr>", "results.html");
+                    } else {
+                        write_dump(proc_name + ":" + result, option.regex_result_filename);
+                    }
                 }
             }
         }
@@ -66,6 +76,9 @@ class controller : public misc {
             for(auto &value: ranges) {
                 if(!value.empty() && is_read_section(value[1])) {
                     format_print("Scanning Address Range: '" +  value[0] + "' Name: '" + value[1] + "'", YELLOW, '!', 1, true, false);
+                    if(value.size() == 3 && option.is_writable) {
+                        format_print("Writable Memory Range" + (!option.is_verbose ? ": '" + value[0] + "'" : ""), YELLOW, '!', (option.is_verbose ? 2 : 1), false, false);
+                    }
                     vector<string> range = tokenize(value[0], '-');
                     long start_addr = strtol(range[0].c_str(), NULL, 16);
                     long end_addr = strtol(range[1].c_str(), NULL, 16);
@@ -108,12 +121,26 @@ class controller : public misc {
     
     void begin_scan(void)
     {
+        if(option.is_xml) {
+            write_dump("<results>\n\t<time>" + formatted_time("%x") + "</time>", "results.xml");
+        } else if(option.is_html) {
+            write_dump(top_section, "results.html");
+            write_dump("<h2>Scan Results For: " + formatted_time("%x, %X") + "</h2>", "results.html");
+            write_dump(body, "results.html");
+        }
+
         if(option.pid) {
             process_pid(option.pid);
-        }
-        else {
+        } else {
             inter_pids();
         }
+
+        if(option.is_xml) {
+            write_dump("</results>", "results.xml");
+        } else if(option.is_html) {
+            write_dump(footer, "results.html");
+        }
+
         format_print("Finished", YELLOW, '!');
     }
     

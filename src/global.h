@@ -22,7 +22,10 @@ struct options {
     bool is_write_proc_info = false;
     bool is_verbose = false;
     bool is_write = false;
+    bool is_html = false;
+    bool is_xml = false;
     bool is_colored = true;
+    bool is_writable = false;
     bool is_env_scan = false;
     bool is_regex_write = false;
 };

@@ -31,9 +31,12 @@ class arg : public misc{
             << "\t-i\tShow Detailed Process/User Info" << endl
             << "\t-a\tScan all Memory Ranges not just Heap/Stack" << endl
             << "\t-e\tScan Process Environment Files" << endl
+            << "\t-w\tCheck if Memory Range is Writable" << endl
             << "\t-r=\tRegex Database to Use" << endl
             << "\t-p=\tSpecify Single PID to Scan" << endl
             << "Output:" << endl
+            << "\t-x\tFormat Regex Results to XML" << endl
+            << "\t-r\tFormat Regex Results to an HTML Document" << endl
             << "\t-wm\tWrite Raw Memory to File Default Directory is: '" << option.directory << "'" << endl
             << "\t-wi\tWrite Process Info to Beginning of File (Used in Conjunction with -w)" << endl
             << "\t-wr\tWrite Regex Output to File (Will Appear in the Output Directory)" << endl
@@ -83,6 +86,12 @@ class arg : public misc{
                     else if(arg == "-s") {
                         option.suppress_banner = true;
                     }
+                    else if(arg == "-w") {
+                        option.is_writable = true;
+                    }
+                    else if(arg == "-r") {
+                        option.is_html = true;
+                    }
                     else if(arg == "-a") {
                         option.dump_all = true;
                     }
@@ -91,6 +100,9 @@ class arg : public misc{
                     }
                     else if(arg == "-c") {
                         option.is_colored = false;
+                    }
+                    else if(arg == "-x") {
+                        option.is_xml = true;
                     }
                     else if(arg == "-e") {
                         option.is_env_scan = true;

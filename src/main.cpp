@@ -3,6 +3,7 @@
 using namespace std;
 
 #include "global.h"
+#include "html.h"
 
 options option; // creating instance of options struct to fill in with user data
 
