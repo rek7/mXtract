@@ -17,6 +17,8 @@ In most linux environments users can access the memory of processes, this allows
 ## Features
 + Ability to enter regex lists
 + Clear and Readable Display
++ Check if Memory Range is Writable with Current Permissions
++ Output in XML and HTML along with the default output (process name:result)
 + Ability to Mass Scan Every Proccess or a Specific PID
 + Able to choose memory sections to scan
 + Ability to Show Detailed Process Information
