@@ -41,9 +41,12 @@ Target and Regex:
         -i      Show Detailed Process/User Info
         -a      Scan all Memory Ranges not just Heap/Stack
         -e      Scan Process Environment Files
+        -w      Check if Memory Range is Writable
         -r=     Regex Database to Use
         -p=     Specify Single PID to Scan
 Output:
+        -x      Format Regex Results to XML
+        -r      Format Regex Results to an HTML Document
         -wm     Write Raw Memory to File Default Directory is: 'pid/'
         -wi     Write Process Info to Beginning of File (Used in Conjunction with -w)
         -wr     Write Regex Output to File (Will Appear in the Output Directory)
