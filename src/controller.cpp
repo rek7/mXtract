@@ -2,7 +2,7 @@ class controller : public misc {
     public:
     controller(void)
     {
-        if(option.is_write || option.is_regex_write || option.is_xml) {
+        if(option.is_write || option.is_regex_write || option.is_xml || option.is_html) {
             if(!is_dir(option.directory)) {
                 if(mkdir(option.directory.c_str(), 0755)) {
                     format_print("ERROR CREATING OUTPUT DIRECTORY", RED, '-');
