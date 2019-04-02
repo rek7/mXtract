@@ -1,5 +1,4 @@
-#ifndef __GLOBAL_H__
-#define __GLOBAL_H__
+#pragma once
 
 #define GREEN "\e[32m"
 #define LIGHT_GREEN "\e[92m"
@@ -30,4 +29,3 @@ struct options {
     bool is_regex_write = false;
 };
 
-#endif
