@@ -1,5 +1,4 @@
-#ifndef __HTML_H__
-#define __HTML_H__
+#pragma once
 
 string top_section = R"(<!DOCTYPE html>
 <html>
@@ -53,4 +52,3 @@ string footer = R"(           </tr>
 
 </html>)";
 
-#endif

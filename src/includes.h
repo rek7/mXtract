@@ -1,5 +1,4 @@
-#ifndef __INCLUDES_H__
-#define __INCLUDES_H__
+#pragma once
 
 #include <iostream>
 #include <fstream>
@@ -20,4 +19,3 @@ extern "C" {
     #include <pwd.h>
 }
 
-#endif
