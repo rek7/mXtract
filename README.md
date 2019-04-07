@@ -46,7 +46,7 @@ Output:
         -x      Format Regex Results to XML
         -r      Format Regex Results to an HTML Document
         -wm     Write Raw Memory to File Default Directory is: 'pid/'
-        -wi     Write Process Info to Beginning of File (Used in Conjunction with -w)
+        -wi     Write Process Info to Beginning of File (Used in Conjunction with -wm)
         -wr     Write Regex Output to File (Will Appear in the Output Directory)
         -f=     Regex Results Filename Default is: 'regex_results.txt'
         -d=     Custom Ouput Directory
