@@ -38,7 +38,7 @@ class arg : public misc{
             << "\t-x\tFormat Regex Results to XML" << endl
             << "\t-r\tFormat Regex Results to an HTML Document" << endl
             << "\t-wm\tWrite Raw Memory to File Default Directory is: '" << option.directory << "'" << endl
-            << "\t-wi\tWrite Process Info to Beginning of File (Used in Conjunction with -w)" << endl
+            << "\t-wi\tWrite Process Info to Beginning of File (Used in Conjunction with -wm)" << endl
             << "\t-wr\tWrite Regex Output to File (Will Appear in the Output Directory)" << endl
             << "\t-f=\tRegex Results Filename Default is: '" << option.regex_result_filename << "'" << endl
             << "\t-d=\tCustom Ouput Directory" << endl
